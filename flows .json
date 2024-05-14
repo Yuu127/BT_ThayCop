@@ -1,0 +1,146 @@
+[
+    {
+        "id": "8422ce9fe0f64cfc",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dc23e5864609652c",
+        "type": "MSSQL-CN",
+        "tdsVersion": "7_4",
+        "name": "demo",
+        "server": "127.0.0.1",
+        "port": "1433",
+        "encyption": true,
+        "trustServerCertificate": true,
+        "database": "demo",
+        "useUTC": false,
+        "connectTimeout": "",
+        "requestTimeout": "",
+        "cancelTimeout": "",
+        "pool": "10",
+        "parseJSON": false,
+        "enableArithAbort": true,
+        "readOnlyIntent": false
+    },
+    {
+        "id": "ca9a2dec0b27ddd8",
+        "type": "inject",
+        "z": "8422ce9fe0f64cfc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "a55f45e72ea5cc8e"
+            ]
+        ]
+    },
+    {
+        "id": "135ca9c236f99399",
+        "type": "debug",
+        "z": "8422ce9fe0f64cfc",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a55f45e72ea5cc8e",
+        "type": "http request",
+        "z": "8422ce9fe0f64cfc",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://localhost:8000/data",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "f569b9e586626a62"
+            ]
+        ]
+    },
+    {
+        "id": "ec6b5f612c54b4ff",
+        "type": "MSSQL",
+        "z": "8422ce9fe0f64cfc",
+        "mssqlCN": "dc23e5864609652c",
+        "name": "",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "",
+        "modeOpt": "queryMode",
+        "modeOptType": "query",
+        "queryOpt": "payload",
+        "queryOptType": "editor",
+        "paramsOpt": "queryParams",
+        "paramsOptType": "none",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [],
+        "x": 720,
+        "y": 200,
+        "wires": [
+            [
+                "135ca9c236f99399"
+            ]
+        ]
+    },
+    {
+        "id": "f569b9e586626a62",
+        "type": "function",
+        "z": "8422ce9fe0f64cfc",
+        "name": "function 1",
+        "func": "msg.payload = `insert into history(sid, value) values (1,${msg.payload.temperature}); insert into history(sid, value) values (2,${msg.payload.humidity})`\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "ec6b5f612c54b4ff"
+            ]
+        ]
+    }
+]

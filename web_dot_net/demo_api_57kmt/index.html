@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BT PYthon</title>
+	<link rel="stylesheet" href="index.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 20px;
+		}
+
+		#currentValues {
+			margin-bottom: 20px;
+		}
+
+			#currentValues div {
+				margin: 5px 0;
+			}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<h1>Website thời tiết qua cảm biến random python</h1>
+	<div id="kq">Kq ở dây</div>
+	<div id="currentValues">
+		<div>Current Temperature: <span id="currentTemp">Loading...</span></div>
+		<div>Current Humidity: <span id="currentHumidity">Loading...</span></div>
+	</div>
+	<canvas id="myChart"></canvas>
+	<script src="index.js"></script>
+</body>
+</html>
